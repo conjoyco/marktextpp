@@ -565,6 +565,12 @@ const commands = [
     }
   },
   {
+    id: 'view.split-view-mode',
+    execute: async () => {
+      bus.emit('view:toggle-view-entry', 'splitView')
+    }
+  },
+  {
     id: 'view.typewriter-mode',
     execute: async () => {
       focusEditorAndExecute(() => bus.emit('view:toggle-view-entry', 'typewriter'))

@@ -129,6 +129,7 @@
       "commandPalette": "命令面板",
       "sourceCode": "原始碼模式",
       "sourceCodeMode": "原始碼模式",
+      "splitViewMode": "分割檢視模式",
       "typewriter": "打字機模式",
       "typewriterMode": "打字機模式",
       "focus": "專注模式",
@@ -979,6 +980,7 @@
     "view": {
       "commandPalette": "命令面板",
       "sourceCodeMode": "原始碼模式",
+      "splitViewMode": "分割檢視模式",
       "typewriterMode": "打字機模式",
       "focusMode": "專注模式",
       "toggleSourceCodeMode": "切換原始碼模式",

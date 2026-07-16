@@ -129,6 +129,7 @@
       "commandPalette": "コマンドパレット",
       "sourceCode": "ソースコードモード",
       "sourceCodeMode": "ソースコードモード",
+      "splitViewMode": "分割表示モード",
       "typewriter": "タイプライターモード",
       "typewriterMode": "タイプライターモード",
       "focus": "フォーカスモード",
@@ -979,6 +980,7 @@
     "view": {
       "commandPalette": "コマンドパレット",
       "sourceCodeMode": "ソースコードモード",
+      "splitViewMode": "分割表示モード",
       "typewriterMode": "タイプライターモード",
       "focusMode": "フォーカスモード",
       "toggleSourceCodeMode": "ソースコードモードを切り替え",

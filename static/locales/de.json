@@ -129,6 +129,7 @@
       "commandPalette": "Befehlspalette",
       "sourceCode": "Quellcode-Modus",
       "sourceCodeMode": "Quellcode-Modus",
+      "splitViewMode": "Geteilte Ansicht",
       "typewriter": "Schreibmaschinen-Modus",
       "typewriterMode": "Schreibmaschinen-Modus",
       "focus": "Fokus-Modus",
@@ -977,6 +978,7 @@
     "view": {
       "commandPalette": "Befehlspalette",
       "sourceCodeMode": "Quellcode-Modus",
+      "splitViewMode": "Geteilte Ansicht",
       "typewriterMode": "Schreibmaschinen-Modus",
       "focusMode": "Fokus-Modus",
       "toggleSourceCodeMode": "Quellcode-Modus umschalten",

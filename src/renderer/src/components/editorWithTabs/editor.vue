@@ -954,6 +954,14 @@ const handleInsertParagraph = (location) => {
   editor.value && editor.value.insertParagraph(location)
 }
 
+// Live update from the split view source pane. Render without the cursor so
+// the WYSIWYG pane doesn't steal focus from CodeMirror while typing.
+const handleSplitSourceChange = ({ markdown: newMarkdown, muyaIndexCursor }) => {
+  if (editor.value) {
+    editor.value.setMarkdown(newMarkdown, undefined, false, muyaIndexCursor)
+  }
+}
+
 const blurEditor = () => {
   editor.value.blur(false, true)
 }
@@ -1089,6 +1097,7 @@ onMounted(() => {
   bus.on('insert-image', insertImage)
   bus.on('image-uploaded', handleUploadedImage)
   bus.on('file-changed', handleFileChange)
+  bus.on('split-source-change', handleSplitSourceChange)
   bus.on('editor-blur', blurEditor)
   bus.on('editor-focus', focusEditor)
   bus.on('copyAsMarkdown', handleCopyPaste)
@@ -1201,6 +1210,7 @@ onBeforeUnmount(() => {
   bus.off('insert-image', insertImage)
   bus.off('image-uploaded', handleUploadedImage)
   bus.off('file-changed', handleFileChange)
+  bus.off('split-source-change', handleSplitSourceChange)
   bus.off('editor-blur', blurEditor)
   bus.off('editor-focus', focusEditor)
   bus.off('copyAsMarkdown', handleCopyPaste)

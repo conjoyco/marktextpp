@@ -26,6 +26,16 @@ export default function (keybindings) {
         }
       },
       {
+        id: 'splitViewModeMenuItem',
+        label: t('menu.view.splitViewMode'),
+        accelerator: keybindings.getAccelerator('view.split-view-mode'),
+        type: 'checkbox',
+        checked: false,
+        click(item, focusedWindow) {
+          actions.toggleSplitViewMode(focusedWindow)
+        }
+      },
+      {
         id: 'typewriterModeMenuItem',
         label: t('menu.view.typewriterMode'),
         accelerator: keybindings.getAccelerator('view.typewriter-mode'),

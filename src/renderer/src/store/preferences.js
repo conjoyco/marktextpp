@@ -87,6 +87,7 @@ export const usePreferencesStore = defineStore('preferences', {
     typewriter: false, // typewriter mode
     focus: false, // focus mode
     sourceCode: false, // source code mode
+    splitView: false, // side-by-side mode (source + preview)
 
     // user configration
     imageFolderPath: '',
@@ -126,8 +127,19 @@ export const usePreferencesStore = defineStore('preferences', {
     SET_MODE({ type, checked }) {
       this[type] = checked
     },
+    // Toggles the given edit mode and returns all mode entries that changed.
+    // `sourceCode` and `splitView` are mutually exclusive.
     TOGGLE_VIEW_MODE(entryName) {
       this[entryName] = !this[entryName]
+      const changes = { [entryName]: this[entryName] }
+      if (entryName === 'sourceCode' && this.sourceCode && this.splitView) {
+        this.splitView = false
+        changes.splitView = false
+      } else if (entryName === 'splitView' && this.splitView && this.sourceCode) {
+        this.sourceCode = false
+        changes.sourceCode = false
+      }
+      return changes
     },
     ASK_FOR_USER_PREFERENCE() {
       window.electron.ipcRenderer.send('mt::ask-for-user-preference')
@@ -168,16 +180,16 @@ export const usePreferencesStore = defineStore('preferences', {
         bus.emit('show-command-palette')
       })
       window.electron.ipcRenderer.on('mt::toggle-view-mode-entry', (event, entryName) => {
-        this.TOGGLE_VIEW_MODE(entryName)
-        this.DISPATCH_EDITOR_VIEW_STATE({ [entryName]: this[entryName] })
+        const changes = this.TOGGLE_VIEW_MODE(entryName)
+        this.DISPATCH_EDITOR_VIEW_STATE(changes)
       })
     },
 
     // Toggle a view option and notify main process to toggle menu item.
     LISTEN_TOGGLE_VIEW() {
       bus.on('view:toggle-view-entry', (entryName) => {
-        this.TOGGLE_VIEW_MODE(entryName)
-        this.DISPATCH_EDITOR_VIEW_STATE({ [entryName]: this[entryName] })
+        const changes = this.TOGGLE_VIEW_MODE(entryName)
+        this.DISPATCH_EDITOR_VIEW_STATE(changes)
       })
     },
 
