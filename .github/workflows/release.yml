@@ -36,6 +36,9 @@ jobs:
   build:
     needs: lint
     runs-on: ${{ matrix.os }}
+    # Mac signing/notarization needs Apple secrets; don't let a Mac failure
+    # block the Windows and Linux release
+    continue-on-error: ${{ matrix.platform == 'mac' }}
     strategy:
       fail-fast: false
       matrix:
@@ -219,12 +222,13 @@ jobs:
           ### Notes for Arch Linux Users
           Extract the tar.gz and run `marktext` from the extracted directory, or create a PKGBUILD.
           EOF
+          sed -i "s/[$]VERSION/${VERSION}/g" release-notes.md
           echo "notes_file=release-notes.md" >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          draft: true
+          draft: false
           generate_release_notes: true
           body_path: ${{ steps.notes.outputs.notes_file }}
           files: release-files/*
