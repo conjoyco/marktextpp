@@ -9,6 +9,7 @@ on:
       version:
         description: 'Version to release (e.g. 1.0.0)'
         required: false
+        default: '1.3.0'
 
 jobs:
   # Quality checks before building
@@ -192,7 +193,7 @@ jobs:
       - name: Generate release notes
         id: notes
         run: |
-          VERSION="${GITHUB_REF_NAME:-${{ github.event.inputs.version || 'dev' }}}"
+          VERSION="${{ github.ref_type == 'tag' && github.ref_name || format('v{0}', github.event.inputs.version) }}"
           cat << 'EOF' > release-notes.md
           ## MarkText $VERSION
 
@@ -229,6 +230,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           draft: false
+          # On manual dispatch there is no pushed tag, so create it here at
+          # the commit the workflow ran on
+          tag_name: ${{ github.ref_type == 'tag' && github.ref_name || format('v{0}', github.event.inputs.version) }}
+          target_commitish: ${{ github.sha }}
           generate_release_notes: true
           body_path: ${{ steps.notes.outputs.notes_file }}
           files: release-files/*
