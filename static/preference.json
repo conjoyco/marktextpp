@@ -38,6 +38,7 @@
   "imageRelativeDirectoryName": "assets",
   "hideLinkPopup": false,
   "autoCheck": false,
+  "autoCheckUpdates": true,
 
   "preferLooseListItem": true,
   "bulletListMarker": "-",

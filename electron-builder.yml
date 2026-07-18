@@ -1,5 +1,11 @@
 appId: com.electron.app
 productName: marktext
+# Where electron-updater looks for new releases (embedded as app-update.yml);
+# CI builds run with --publish never, so electron-builder itself never uploads
+publish:
+  provider: github
+  owner: conjoyco
+  repo: marktextpp
 directories:
   buildResources: build
 files:

@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu, ipcMain } from 'electron'
+import { app, BrowserWindow, Menu, ipcMain } from 'electron'
 import electronUpdater from 'electron-updater'
 import { COMMANDS } from '../../commands'
 import { isOsx } from '../../config'
@@ -6,12 +6,16 @@ import { isOsx } from '../../config'
 const { autoUpdater } = electronUpdater
 
 let runningUpdate = false
+// A silent check reports nothing unless an update is actually available,
+// so background checks at startup don't spam notifications.
+let silentCheck = false
 let win = null
 
 autoUpdater.autoDownload = false
 
 autoUpdater.on('error', (error) => {
-  if (win) {
+  runningUpdate = false
+  if (win && !silentCheck) {
     win.webContents.send(
       'mt::UPDATE_ERROR',
       error === null ? 'Error: unknown' : (error.message || error).toString()
@@ -20,6 +24,7 @@ autoUpdater.on('error', (error) => {
 })
 
 autoUpdater.on('update-available', () => {
+  silentCheck = false
   if (win) {
     win.webContents.send(
       'mt::UPDATE_AVAILABLE',
@@ -30,7 +35,7 @@ autoUpdater.on('update-available', () => {
 })
 
 autoUpdater.on('update-not-available', () => {
-  if (win) {
+  if (win && !silentCheck) {
     win.webContents.send('mt::UPDATE_NOT_AVAILABLE', 'Current version is up-to-date.')
   }
   runningUpdate = false
@@ -68,12 +73,25 @@ export const userSetting = () => {
   ipcMain.emit('app-create-settings-window')
 }
 
-export const checkUpdates = (browserWindow) => {
+export const checkUpdates = (browserWindow, { silent = false } = {}) => {
   if (!runningUpdate) {
     runningUpdate = true
+    silentCheck = silent
     win = browserWindow
     autoUpdater.checkForUpdates()
   }
+}
+
+export const checkUpdatesSilently = (browserWindow) => {
+  // Updates can only be applied by packaged builds, and on macOS only by
+  // signed ones, so background checks run on Windows and Linux AppImage
+  if (!app.isPackaged) {
+    return
+  }
+  if (process.platform !== 'win32' && !process.env.APPIMAGE) {
+    return
+  }
+  checkUpdates(browserWindow, { silent: true })
 }
 
 export const osxHide = () => {

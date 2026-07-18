@@ -217,6 +217,11 @@
     "type": "boolean",
     "default": false
   },
+  "autoCheckUpdates": {
+    "description": "General--Whether to check for updates in the background at startup.",
+    "type": "boolean",
+    "default": true
+  },
   "preferLooseListItem": {
     "description": "Markdown--The preferred list type",
     "type": "boolean",

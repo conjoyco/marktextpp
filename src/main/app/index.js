@@ -10,6 +10,7 @@ import parseArgs from '../cli/parser'
 import { normalizeAndResolvePath } from '../filesystem'
 import { normalizeMarkdownPath } from '../filesystem/markdown'
 import { registerKeyboardListeners } from '../keyboard'
+import { checkUpdatesSilently } from '../menu/actions/marktext'
 import { selectTheme } from '../menu/actions/theme'
 import { dockMenu } from '../menu/templates'
 import registerSpellcheckerListeners from '../spellchecker'
@@ -364,6 +365,16 @@ class App {
     } else {
       // Create immediately on Windows/macOS
       createWindow()
+    }
+
+    const { autoCheckUpdates } = preferences.getAll()
+    if (autoCheckUpdates) {
+      setTimeout(() => {
+        const activeWindow = this._windowManager.getActiveWindow()
+        if (activeWindow) {
+          checkUpdatesSilently(activeWindow.browserWindow)
+        }
+      }, 10000)
     }
 
     // this.shortcutCapture = new ShortcutCapture()

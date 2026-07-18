@@ -163,6 +163,7 @@ jobs:
             dist/*.deb
             dist/*.rpm
             dist/*.tar.gz
+            dist/latest*.yml
           if-no-files-found: error
 
       - name: Upload Mac Artifacts
@@ -173,6 +174,8 @@ jobs:
           path: |
             dist/*.dmg
             dist/*.zip
+            dist/*.blockmap
+            dist/latest*.yml
           if-no-files-found: error
 
       - name: Upload Windows Artifacts
@@ -183,6 +186,8 @@ jobs:
           path: |
             dist/*.exe
             dist/*.zip
+            dist/*.blockmap
+            dist/latest*.yml
           if-no-files-found: error
 
   # Create GitHub Release with all artifacts
@@ -204,8 +209,17 @@ jobs:
       - name: Prepare release files
         run: |
           mkdir -p release-files
-          find artifacts -type f \( -name "*.exe" -o -name "*.zip" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.snap" -o -name "*.deb" -o -name "*.rpm" -o -name "*.tar.gz" \) -exec cp {} release-files/ \;
-          ls -la release-files/
+          find artifacts -type f \( -name "*.exe" -o -name "*.zip" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.snap" -o -name "*.deb" -o -name "*.rpm" -o -name "*.tar.gz" -o -name "*.blockmap" -o -name "latest*.yml" \) -exec cp {} release-files/ \;
+
+          # Stable-named copies so /releases/latest/download/<name> is a
+          # permanent URL that always serves the newest build
+          cd release-files
+          for f in marktext-win-x64-*-setup.exe; do [ -e "$f" ] && cp "$f" marktext-win-setup.exe; done
+          for f in marktext-win-x64-*.zip; do [ -e "$f" ] && cp "$f" marktext-win-portable.zip; done
+          for f in marktext-mac-arm64-*.dmg; do [ -e "$f" ] && cp "$f" marktext-mac-arm64.dmg; done
+          for f in marktext-mac-x64-*.dmg; do [ -e "$f" ] && cp "$f" marktext-mac-intel.dmg; done
+          for f in marktext-linux-*.AppImage; do [ -e "$f" ] && cp "$f" marktext-linux.AppImage; done
+          ls -la
 
       - name: Generate release notes
         id: notes
@@ -213,6 +227,14 @@ jobs:
           VERSION="${{ github.ref_type == 'tag' && github.ref_name || format('v{0}', github.event.inputs.version) }}"
           cat << 'EOF' > release-notes.md
           ## MarkText $VERSION
+
+          ### Always-latest links (bookmark these — they always serve the newest release)
+
+          - Windows installer: https://github.com/conjoyco/marktextpp/releases/latest/download/marktext-win-setup.exe
+          - Windows portable: https://github.com/conjoyco/marktextpp/releases/latest/download/marktext-win-portable.zip
+          - Mac (Apple Silicon): https://github.com/conjoyco/marktextpp/releases/latest/download/marktext-mac-arm64.dmg
+          - Mac (Intel): https://github.com/conjoyco/marktextpp/releases/latest/download/marktext-mac-intel.dmg
+          - Linux AppImage: https://github.com/conjoyco/marktextpp/releases/latest/download/marktext-linux.AppImage
 
           ### Downloads
 
