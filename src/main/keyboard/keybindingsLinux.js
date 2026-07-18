@@ -96,6 +96,7 @@ export default new Map([
   // View menu
   ['view.command-palette', 'Ctrl+Shift+P'],
   ['view.source-code-mode', 'Ctrl+E'],
+  ['view.split-view-mode', 'Ctrl+\\'],
   ['view.typewriter-mode', 'Ctrl+Shift+G'],
   ['view.focus-mode', 'Ctrl+Shift+J'],
   ['view.toggle-sidebar', 'Ctrl+J'],

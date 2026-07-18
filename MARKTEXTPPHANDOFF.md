@@ -139,10 +139,16 @@ Build config lives in `electron-builder.yml` (`win:` targets = nsis + zip).
 
 The user said "later, if it bothers me." In rough order:
 
-1. 3-way toggle: **raw | side-by-side | pretty**.
-2. Draggable vertical separator on the split view (resize either pane).
-3. True bidirectional live sync (edit either pane, other updates) — MarkText's
-   Muya engine already round-trips markdown, so this is mostly UI wiring.
+1. ~~3-way toggle: **raw | side-by-side | pretty**.~~ **DONE 2026-07-16** —
+   View → Side-by-Side Mode (`Ctrl+\` / `Cmd+\`, also in the command palette).
+   Mutually exclusive with Source Code Mode; raw stays `Ctrl+E`.
+2. ~~Draggable vertical separator on the split view (resize either pane).~~
+   **DONE 2026-07-16** — ratio clamped 20–80%, persisted in localStorage.
+3. ~~True bidirectional live sync (edit either pane, other updates).~~
+   **DONE 2026-07-16** — CodeMirror→Muya debounced 300ms (renders without
+   stealing focus), Muya→CodeMirror mirrored 200ms via the store watcher,
+   hover-driven proportional scroll sync. See
+   `src/renderer/src/components/editorWithTabs/splitSource.vue`.
 4. Typora-grade polish passes.
 5. Rename internal `marktext` → `marktextpp` (package name, product name, ids).
 

@@ -129,6 +129,7 @@
       "commandPalette": "명령 팔레트",
       "sourceCode": "소스 코드 모드",
       "sourceCodeMode": "소스 코드 모드",
+      "splitViewMode": "분할 보기 모드",
       "typewriter": "타자기 모드",
       "typewriterMode": "타자기 모드",
       "focus": "집중 모드",
@@ -979,6 +980,7 @@
     "view": {
       "commandPalette": "명령 팔레트",
       "sourceCodeMode": "소스 코드 모드",
+      "splitViewMode": "분할 보기 모드",
       "typewriterMode": "타자기 모드",
       "focusMode": "집중 모드",
       "toggleSourceCodeMode": "소스 코드 모드 토글",

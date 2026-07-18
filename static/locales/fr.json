@@ -129,6 +129,7 @@
       "commandPalette": "Palette de commandes",
       "sourceCode": "Mode code source",
       "sourceCodeMode": "Mode code source",
+      "splitViewMode": "Mode côte à côte",
       "typewriter": "Mode machine à écrire",
       "typewriterMode": "Mode machine à écrire",
       "focus": "Mode focus",
@@ -979,6 +980,7 @@
     "view": {
       "commandPalette": "Palette de commandes",
       "sourceCodeMode": "Mode code source",
+      "splitViewMode": "Mode côte à côte",
       "typewriterMode": "Mode machine à écrire",
       "focusMode": "Mode focus",
       "toggleSourceCodeMode": "Basculer le mode code source",

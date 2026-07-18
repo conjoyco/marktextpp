@@ -174,6 +174,7 @@ const getCommandDescriptions = () => {
     // 编辑模式
     'view.toggle-source-code-mode': t('commands.view.toggleSourceCodeMode'),
     'view.source-code-mode': t('commands.view.sourceCodeMode'),
+    'view.split-view-mode': t('commands.view.splitViewMode'),
     'view.toggle-typewriter-mode': t('commands.view.toggleTypewriterMode'),
     'view.typewriter-mode': t('commands.view.typewriterMode'),
     'view.toggle-focus-mode': t('commands.view.toggleFocusMode'),

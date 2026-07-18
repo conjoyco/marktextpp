@@ -48,6 +48,10 @@ export const toggleSourceCodeMode = (win) => {
   toggleTypeMode(win, 'sourceCode')
 }
 
+export const toggleSplitViewMode = (win) => {
+  toggleTypeMode(win, 'splitView')
+}
+
 export const toggleSidebar = (win) => {
   toggleLayout(win, 'showSideBar')
 }
@@ -81,6 +85,7 @@ export const loadViewCommands = (commandManager) => {
   commandManager.add(COMMANDS.VIEW_FOCUS_MODE, toggleFocusMode)
   commandManager.add(COMMANDS.VIEW_FORCE_RELOAD_IMAGES, reloadImageCache)
   commandManager.add(COMMANDS.VIEW_SOURCE_CODE_MODE, toggleSourceCodeMode)
+  commandManager.add(COMMANDS.VIEW_SPLIT_VIEW_MODE, toggleSplitViewMode)
   commandManager.add(COMMANDS.VIEW_TOGGLE_SIDEBAR, toggleSidebar)
   commandManager.add(COMMANDS.VIEW_TOGGLE_TABBAR, toggleTabBar)
   commandManager.add(COMMANDS.VIEW_TOGGLE_TOC, showTableOfContents)
@@ -123,6 +128,9 @@ export const viewLayoutChanged = (applicationMenu, changes) => {
         changeMenuByName('sourceCodeModeMenuItem', value)
         disableMenuByName(focusModeMenuItemId, !value)
         disableMenuByName(typewriterModeMenuItemId, !value)
+        break
+      case 'splitView':
+        changeMenuByName('splitViewModeMenuItem', value)
         break
       case 'typewriter':
         changeMenuByName(typewriterModeMenuItemId, value)
