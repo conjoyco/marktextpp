@@ -5,6 +5,7 @@ import pluginI18nJson from 'eslint-plugin-i18n-json'
 import pluginJsonc from 'eslint-plugin-jsonc'
 import neostandard from 'neostandard'
 import babelParser from '@babel/eslint-parser'
+import eslintConfigPrettier from 'eslint-config-prettier'
 const { configs: js } = eslintJs
 
 export default [
@@ -195,5 +196,8 @@ export default [
         }
       ]
     }
-  }
+  },
+
+  // 7. Must be last: disable formatting rules that conflict with Prettier
+  eslintConfigPrettier
 ]

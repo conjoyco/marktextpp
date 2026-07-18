@@ -8,6 +8,7 @@
   "homepage": "https://github.com/peterjthomson/marktext",
   "scripts": {
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint --cache .",
     "start": "electron-vite preview",
     "minify-locales": "node scripts/minify-locales.mjs",

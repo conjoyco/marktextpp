@@ -1,0 +1,15 @@
+# Build output
+dist/
+out/
+src/muya/dist/
+static/locales/*.min.json
+
+# Generated test artifacts
+playwright-report/
+test-results/
+
+# Test fixtures must keep their exact bytes (e.g. the CRLF encoding fixture)
+tests/fixtures/
+
+# Vendored third-party libraries
+src/muya/lib/assets/libs/

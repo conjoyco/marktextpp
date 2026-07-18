@@ -18,7 +18,7 @@ jobs:
         os: [ubuntu-latest, windows-2022, macos-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -28,7 +28,7 @@ jobs:
           git checkout -qf refs/remotes/origin/pr/${{ inputs.pr }}
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22.21.1
 
@@ -55,7 +55,7 @@ jobs:
 
       # Adjust the path to your build outputs per OS
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: marktext-${{ matrix.os }}
           # Replace with your actual dist paths or globs
