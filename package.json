@@ -85,6 +85,7 @@
     "@babel/eslint-parser": "^7.28.5",
     "@electron-toolkit/eslint-config": "^2.1.0",
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",
+    "@electron/rebuild": "^4.2.0",
     "@playwright/test": "^1.57.0",
     "@types/source-map-support": "^0.5.10",
     "@vitejs/plugin-vue": "^6.0.3",
