@@ -113,13 +113,12 @@
               <el-radio label="folder">
                 {{ t('preferences.general.startup.openDefaultDirectory') }}
               </el-radio>
-              <el-button
-                size="small"
-                @click="selectDefaultDirectoryToOpen"
-              >
+              <el-button size="small" @click="selectDefaultDirectoryToOpen">
                 {{ t('preferences.general.startup.selectFolder') }}
               </el-button>
-              <span v-if="defaultDirectoryToOpen" class="directory-path">{{ defaultDirectoryToOpen }}</span>
+              <span v-if="defaultDirectoryToOpen" class="directory-path">{{
+                defaultDirectoryToOpen
+              }}</span>
             </div>
             <div class="startup-option">
               <el-radio label="blank">

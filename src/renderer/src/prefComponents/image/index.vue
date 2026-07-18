@@ -10,10 +10,7 @@
           :content="t('preferences.image.clipboardTooltip')"
           placement="top-start"
         >
-          <InfoFilled
-            width="16"
-            height="16"
-          />
+          <InfoFilled width="16" height="16" />
         </el-tooltip>
       </div>
       <CurSelect

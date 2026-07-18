@@ -27,7 +27,9 @@ const getOffset = (offset, { range: { start, end }, type, tag, anchor, alt }) =>
       if (dis < 0) return 0
       if (dis >= 0 && dis < OPEN_MARKER_LEN) return -dis
       if (dis >= OPEN_MARKER_LEN && dis <= len - CLOSE_MARKER_LEN) return -OPEN_MARKER_LEN
-      if (dis > len - CLOSE_MARKER_LEN && dis <= len) { return len - dis - OPEN_MARKER_LEN - CLOSE_MARKER_LEN }
+      if (dis > len - CLOSE_MARKER_LEN && dis <= len) {
+        return len - dis - OPEN_MARKER_LEN - CLOSE_MARKER_LEN
+      }
       if (dis > len) return -OPEN_MARKER_LEN - CLOSE_MARKER_LEN
       break
     }
@@ -237,8 +239,8 @@ const formatCtrl = (ContentState) => {
 
     neighbors = type
       ? neighbors.filter((n) => {
-        return n.type === type || (n.type === 'html_tag' && n.tag === type)
-      })
+          return n.type === type || (n.type === 'html_tag' && n.tag === type)
+        })
       : neighbors
 
     for (const neighbor of neighbors) {

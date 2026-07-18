@@ -1,36 +1,23 @@
 <template>
-  <div
-    v-show="showSearch"
-    class="search-bar"
-    @click.stop="noop"
-  >
-    <div
-      class="left-arrow"
-      @click="toggleSearchType"
-    >
-      <svg
-        class="icon"
-        aria-hidden="true"
-        :class="{ 'arrow-right': type === 'search' }"
-      >
+  <div v-show="showSearch" class="search-bar" @click.stop="noop">
+    <div class="left-arrow" @click="toggleSearchType">
+      <svg class="icon" aria-hidden="true" :class="{ 'arrow-right': type === 'search' }">
         <use xlink:href="#icon-arrowdown" />
       </svg>
     </div>
     <div class="right-controls">
       <section class="search">
-        <div
-          class="input-wrapper"
-          :class="{ error: !!searchErrorMsg }"
-        >
+        <div class="input-wrapper" :class="{ error: !!searchErrorMsg }">
           <input
             ref="search"
             v-model="searchValue"
             type="text"
             :placeholder="t('search.searchPlaceholder')"
             @keyup="debouncedSearchFn($event)"
-          >
+          />
           <div class="controls">
-            <span class="search-result">{{ highlightIndex + 1 }} /
+            <span class="search-result"
+              >{{ highlightIndex + 1 }} /
               {{ highlightCount }}
             </span>
             <span
@@ -58,48 +45,30 @@
               <FindRegexIcon aria-hidden="true" />
             </span>
           </div>
-          <div
-            v-if="searchErrorMsg"
-            class="error-msg"
-          >
+          <div v-if="searchErrorMsg" class="error-msg">
             {{ searchErrorMsg }}
           </div>
         </div>
         <div class="button-group">
-          <button
-            class="button right"
-            @click="find('prev')"
-          >
-            <svg
-              class="icon"
-              aria-hidden="true"
-            >
+          <button class="button right" @click="find('prev')">
+            <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-arrow-up" />
             </svg>
           </button>
-          <button
-            class="button"
-            @click="find('next')"
-          >
-            <svg
-              class="icon"
-              aria-hidden="true"
-            >
+          <button class="button" @click="find('next')">
+            <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-arrowdown" />
             </svg>
           </button>
         </div>
       </section>
-      <section
-        v-if="type === 'replace'"
-        class="replace"
-      >
+      <section v-if="type === 'replace'" class="replace">
         <div class="input-wrapper replace-input">
           <input
             v-model="replaceValue"
             type="text"
             :placeholder="t('search.replacementPlaceholder')"
-          >
+          />
         </div>
         <div class="button-group">
           <el-tooltip
@@ -110,14 +79,8 @@
             :visible-arrow="false"
             :open-delay="1000"
           >
-            <button
-              class="button right"
-              @click="replace(false)"
-            >
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+            <button class="button right" @click="replace(false)">
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-all-inclusive" />
               </svg>
             </button>
@@ -130,14 +93,8 @@
             :visible-arrow="false"
             :open-delay="1000"
           >
-            <button
-              class="button"
-              @click="replace(true)"
-            >
-              <svg
-                class="icon"
-                aria-hidden="true"
-              >
+            <button class="button" @click="replace(true)">
+              <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-replace" />
               </svg>
             </button>

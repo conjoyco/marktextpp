@@ -46,15 +46,15 @@ xcode-select --install
 
 ## Scripts
 
-| Script        | Description                    |
-| ------------- | ------------------------------ |
-| `dev`         | Run in development mode        |
-| `build`       | Build application bundles      |
-| `build:win`   | Build Windows packages         |
-| `build:mac`   | Build macOS packages           |
-| `build:linux` | Build Linux packages           |
-| `lint`        | Run ESLint                     |
-| `test:unit`   | Run unit tests                 |
-| `test:e2e`    | Run end-to-end tests           |
+| Script        | Description               |
+| ------------- | ------------------------- |
+| `dev`         | Run in development mode   |
+| `build`       | Build application bundles |
+| `build:win`   | Build Windows packages    |
+| `build:mac`   | Build macOS packages      |
+| `build:linux` | Build Linux packages      |
+| `lint`        | Run ESLint                |
+| `test:unit`   | Run unit tests            |
+| `test:e2e`    | Run end-to-end tests      |
 
 See `package.json` for all available scripts.

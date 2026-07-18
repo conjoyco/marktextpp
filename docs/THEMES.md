@@ -11,6 +11,7 @@ MarkText includes six built-in themes:
 ## Changing Themes
 
 You can change the theme via:
+
 - **Menu**: View → Theme
 - **Settings**: Preferences → Theme
 - **Keyboard**: Use the command palette (`Cmd/Ctrl+Shift+P`) and search for "theme"

@@ -11,18 +11,9 @@
     }"
     :dir="textDirection"
   >
-    <div
-      ref="editorRef"
-      class="editor-component"
-    />
-    <div
-      v-show="imageViewerVisible"
-      class="image-viewer"
-    >
-      <span
-        class="icon-close"
-        @click="setImageViewerVisible(false)"
-      >
+    <div ref="editorRef" class="editor-component" />
+    <div v-show="imageViewerVisible" class="image-viewer">
+      <span class="icon-close" @click="setImageViewerVisible(false)">
         <CloseIcon />
       </span>
       <div ref="imageViewerRef" />
@@ -41,10 +32,7 @@
           {{ t('editor.insertTable.title') }}
         </div>
       </template>
-      <el-form
-        :model="tableChecker"
-        :inline="true"
-      >
+      <el-form :model="tableChecker" :inline="true">
         <el-form-item :label="t('editor.insertTable.rows')">
           <el-input-number
             ref="rowInput"
@@ -70,10 +58,7 @@
           <el-button @click="dialogTableVisible = false">
             {{ t('common.cancel') }}
           </el-button>
-          <el-button
-            type="primary"
-            @click="handleDialogTableConfirm"
-          >
+          <el-button type="primary" @click="handleDialogTableConfirm">
             {{ t('common.ok') }}
           </el-button>
         </div>

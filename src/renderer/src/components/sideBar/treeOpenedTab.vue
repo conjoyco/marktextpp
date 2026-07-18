@@ -5,11 +5,7 @@
     :class="[{ active: currentFile.id === file.id, unsaved: !file.isSaved }]"
     @click="selectFile(file)"
   >
-    <svg
-      class="icon"
-      aria-hidden="true"
-      @click.stop="removeFileInTab(file)"
-    >
+    <svg class="icon" aria-hidden="true" @click.stop="removeFileInTab(file)">
       <use xlink:href="#icon-close-small" />
     </svg>
     <span class="name">{{ file.filename }}</span>

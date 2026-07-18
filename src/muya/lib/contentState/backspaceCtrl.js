@@ -538,11 +538,11 @@ const backspaceCtrl = (ContentState) => {
               const newULBlock =
                 parent.type === 'ul'
                   ? this.createBlock('ul', {
-                    listType: 'bullet'
-                  })
+                      listType: 'bullet'
+                    })
                   : this.createBlock('ol', {
-                    listType: 'order'
-                  })
+                      listType: 'order'
+                    })
 
               let probe = this.getBlock(block.nextSibling)
               const addedChildKeys = []
@@ -586,11 +586,11 @@ const backspaceCtrl = (ContentState) => {
               const newULBlock =
                 parent.type === 'ul'
                   ? this.createBlock('ul', {
-                    listType: 'bullet'
-                  })
+                      listType: 'bullet'
+                    })
                   : this.createBlock('ol', {
-                    listType: 'order'
-                  })
+                      listType: 'order'
+                    })
               let probe = this.getBlock(block.nextSibling)
               const addedChildKeys = []
               while (probe && probe.parent && probe.parent === parent.key) {

@@ -81,7 +81,7 @@ This is the “make Muya lossless” path.
 Pattern (Typora/Panda-like feel; code-editor foundations):
 
 - The document is always **Markdown text**.
-- The UI overlays styling and widgets to *look* formatted:
+- The UI overlays styling and widgets to _look_ formatted:
   - hide/fade syntax tokens away from the cursor
   - heading sizes, list bullets, checkbox widgets, link hover UI, etc.
 - Toolbar operations perform **local text transforms** (insert/remove `**`, add/remove `# `, wrap in `[]()`, etc.).
@@ -133,7 +133,7 @@ Doable, but heavy:
 - mark dirty regions at the block level
 - patch-save: reuse original slices for unchanged nodes
 
-This is the only way to keep Muya’s rich editing semantics *and* guarantee minimal diffs, but it becomes an editor-engine maintenance commitment.
+This is the only way to keep Muya’s rich editing semantics _and_ guarantee minimal diffs, but it becomes an editor-engine maintenance commitment.
 
 ### Path B: Make CodeMirror hybrid mode the primary editor
 
@@ -170,4 +170,3 @@ Only rational if we’re willing to drastically rescope and rebuild many MarkTex
 The branch introduced **Light Touch mode** to reduce diff noise and plug the biggest hole in the existing regenerate-on-save pipeline.
 
 Long-term, the most consistent route to “Typora/Panda feel + minimal diffs” is to leverage the existing **CodeMirror source mode** foundation and evolve it into a **hybrid Markdown projection editor** where Markdown text remains the source of truth.
-

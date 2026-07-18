@@ -116,22 +116,22 @@ MarkText key bindings for Windows. Please see [general key bindings](KEYBINDINGS
 
 #### Tabs
 
-| Id                      | Default                                         | Description                  |
-| ----------------------- | ----------------------------------------------- | ---------------------------- |
-| `tabs.cycleForward`     | <kbd>Ctrl</kbd>+<kbd>Tab</kbd>                  | Cycle through tabs           |
-| `tabs.cycleBackward`    | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd> | Cycle backwards through tabs |
-| `tabs.switchToLeft`     | <kbd>Ctrl</kbd>+<kbd>PageUp</kbd>               | Switch tab to the left       |
-| `tabs.switchToRight`    | <kbd>Ctrl</kbd>+<kbd>PageDown</kbd>             | Switch tab to the right      |
-| `tabs.switchToFirst`    | <kbd>Ctrl</kbd>+<kbd>1</kbd>                    | Switch to 1st tab            |
-| `tabs.switchToSecond`   | <kbd>Ctrl</kbd>+<kbd>2</kbd>                    | Switch to 2nd tab            |
-| `tabs.switchToThird`    | <kbd>Ctrl</kbd>+<kbd>3</kbd>                    | Switch to 3rd tab            |
-| `tabs.switchToFourth`   | <kbd>Ctrl</kbd>+<kbd>4</kbd>                    | Switch to 4th tab            |
-| `tabs.switchToFifth`    | <kbd>Ctrl</kbd>+<kbd>5</kbd>                    | Switch to 5th tab            |
-| `tabs.switchToSixth`    | <kbd>Ctrl</kbd>+<kbd>6</kbd>                    | Switch to 6th tab            |
-| `tabs.switchToSeventh`  | <kbd>Ctrl</kbd>+<kbd>7</kbd>                    | Switch to 7th tab            |
-| `tabs.switchToEighth`   | <kbd>Ctrl</kbd>+<kbd>8</kbd>                    | Switch to 8th tab            |
-| `tabs.switchToNinth`    | <kbd>Ctrl</kbd>+<kbd>9</kbd>                    | Switch to 9th tab            |
-| `tabs.switchToTenth`    | <kbd>Ctrl</kbd>+<kbd>0</kbd>                    | Switch to 10th tab           |
+| Id                     | Default                                         | Description                  |
+| ---------------------- | ----------------------------------------------- | ---------------------------- |
+| `tabs.cycleForward`    | <kbd>Ctrl</kbd>+<kbd>Tab</kbd>                  | Cycle through tabs           |
+| `tabs.cycleBackward`   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd> | Cycle backwards through tabs |
+| `tabs.switchToLeft`    | <kbd>Ctrl</kbd>+<kbd>PageUp</kbd>               | Switch tab to the left       |
+| `tabs.switchToRight`   | <kbd>Ctrl</kbd>+<kbd>PageDown</kbd>             | Switch tab to the right      |
+| `tabs.switchToFirst`   | <kbd>Ctrl</kbd>+<kbd>1</kbd>                    | Switch to 1st tab            |
+| `tabs.switchToSecond`  | <kbd>Ctrl</kbd>+<kbd>2</kbd>                    | Switch to 2nd tab            |
+| `tabs.switchToThird`   | <kbd>Ctrl</kbd>+<kbd>3</kbd>                    | Switch to 3rd tab            |
+| `tabs.switchToFourth`  | <kbd>Ctrl</kbd>+<kbd>4</kbd>                    | Switch to 4th tab            |
+| `tabs.switchToFifth`   | <kbd>Ctrl</kbd>+<kbd>5</kbd>                    | Switch to 5th tab            |
+| `tabs.switchToSixth`   | <kbd>Ctrl</kbd>+<kbd>6</kbd>                    | Switch to 6th tab            |
+| `tabs.switchToSeventh` | <kbd>Ctrl</kbd>+<kbd>7</kbd>                    | Switch to 7th tab            |
+| `tabs.switchToEighth`  | <kbd>Ctrl</kbd>+<kbd>8</kbd>                    | Switch to 8th tab            |
+| `tabs.switchToNinth`   | <kbd>Ctrl</kbd>+<kbd>9</kbd>                    | Switch to 9th tab            |
+| `tabs.switchToTenth`   | <kbd>Ctrl</kbd>+<kbd>0</kbd>                    | Switch to 10th tab           |
 
 #### Misc
 

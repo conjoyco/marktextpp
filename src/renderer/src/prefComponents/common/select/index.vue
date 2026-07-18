@@ -1,26 +1,10 @@
 <template>
-  <section
-    class="pref-select-item"
-    :class="{ 'ag-underdevelop': disable }"
-  >
-    <div
-      v-if="description"
-      class="description"
-      style="display: flex; align-items: center"
-    >
+  <section class="pref-select-item" :class="{ 'ag-underdevelop': disable }">
+    <div v-if="description" class="description" style="display: flex; align-items: center">
       <span>{{ description }}:</span>
-      <InfoFilled
-        v-if="more"
-        width="16"
-        height="16"
-        @click="handleMoreClick"
-      />
+      <InfoFilled v-if="more" width="16" height="16" @click="handleMoreClick" />
     </div>
-    <el-select
-      v-model="selectValue"
-      :disabled="disable"
-      @change="select"
-    >
+    <el-select v-model="selectValue" :disabled="disable" @change="select">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -28,10 +12,7 @@
         :value="item.value"
       />
     </el-select>
-    <div
-      v-if="notes"
-      class="notes"
-    >
+    <div v-if="notes" class="notes">
       {{ notes }}
     </div>
   </section>

@@ -100,4 +100,3 @@ This ensures **the Light Touch baseline becomes the last saved markdown**, preve
   - e.g. `mt::tab-saved` carries `{ id, savedMarkdown }` (or a hash) so baseline updates are exact.
 - **Consider a per-tab “save version”**:
   - Increment a `tab.saveVersion` on each request and echo it back on completion to avoid race issues.
-

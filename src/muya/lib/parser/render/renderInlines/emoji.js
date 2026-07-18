@@ -45,17 +45,17 @@ export default function emoji(h, cursor, block, token, outerClass) {
 
   const emojiVdom = validation
     ? h(
-      contentSelector,
-      {
-        attrs: {
-          spellcheck: 'false'
+        contentSelector,
+        {
+          attrs: {
+            spellcheck: 'false'
+          },
+          dataset: {
+            emoji: validation.emoji
+          }
         },
-        dataset: {
-          emoji: validation.emoji
-        }
-      },
-      content
-    )
+        content
+      )
     : h(contentSelector, content)
 
   return [h(startMarkerSelector, token.marker), emojiVdom, h(endMarkerSelector, token.marker)]

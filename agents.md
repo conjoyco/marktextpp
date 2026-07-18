@@ -1,15 +1,15 @@
 # Agent Guidelines
 
 | ------------------ | --------------------------------- |
-| User preferences   | `src/main/preferences/`           |
-| Keyboard shortcuts | `src/main/keyboard/`              |
-| Menu definitions   | `src/main/menu/templates/`        |
-| Vue components     | `src/renderer/src/components/`    |
-| Pinia stores       | `src/renderer/src/store/`         |
-| CSS themes         | `src/renderer/src/assets/themes/` |
-| Editor engine      | `src/muya/lib/`                   |
-| Translations       | `static/locales/`                 |
-| Build icons        | `build/`                          |
+| User preferences | `src/main/preferences/` |
+| Keyboard shortcuts | `src/main/keyboard/` |
+| Menu definitions | `src/main/menu/templates/` |
+| Vue components | `src/renderer/src/components/` |
+| Pinia stores | `src/renderer/src/store/` |
+| CSS themes | `src/renderer/src/assets/themes/` |
+| Editor engine | `src/muya/lib/` |
+| Translations | `static/locales/` |
+| Build icons | `build/` |
 
 ## Getting Help
 
@@ -129,7 +129,7 @@ Key stores in `src/renderer/src/store/`:
 - `project.js` - Open folder/project
 
 - `commandCenter.js` - Command palette
-  
+
   # AI Agent Guide for MarkText
 
 This guide is designed for AI agents (Claude, GPT, Copilot, etc.) loading into this repository for the first time. It provides essential context to help you understand, navigate, and contribute to this codebase effectively.

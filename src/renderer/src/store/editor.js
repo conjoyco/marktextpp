@@ -1512,18 +1512,20 @@ const trimTrailingNewlines = (text) => {
  */
 const normalizeBlock = (text) => {
   if (!text) return ''
-  return text
-    // Normalize line endings
-    .replace(/\r\n/g, '\n')
-    // Remove trailing spaces from lines
-    .replace(/[ \t]+$/gm, '')
-    // Normalize all blank line variations to single newline for comparison
-    // This treats "no blank line" and "one or more blank lines" as equivalent
-    .replace(/\n+/g, '\n')
-    // Collapse multiple spaces to single space (but not newlines)
-    .replace(/[ \t]+/g, ' ')
-    // Trim
-    .trim()
+  return (
+    text
+      // Normalize line endings
+      .replace(/\r\n/g, '\n')
+      // Remove trailing spaces from lines
+      .replace(/[ \t]+$/gm, '')
+      // Normalize all blank line variations to single newline for comparison
+      // This treats "no blank line" and "one or more blank lines" as equivalent
+      .replace(/\n+/g, '\n')
+      // Collapse multiple spaces to single space (but not newlines)
+      .replace(/[ \t]+/g, ' ')
+      // Trim
+      .trim()
+  )
 }
 
 /**

@@ -7,10 +7,7 @@
       custom-class="ag-dialog-table"
       width="400px"
     >
-      <img
-        class="logo"
-        :src="MarkTextLogo"
-      >
+      <img class="logo" :src="MarkTextLogo" />
       <el-row>
         <el-col :span="24">
           <h3 class="title">
@@ -18,15 +15,10 @@
           </h3>
         </el-col>
         <el-col :span="24">
-          <div class="text">
-            {{ store.appVersion }} (Tkaixiang fork)
-          </div>
+          <div class="text">{{ store.appVersion }} (Tkaixiang fork)</div>
         </el-col>
         <el-col :span="24">
-          <div
-            class="text"
-            style="min-height: auto"
-          >
+          <div class="text" style="min-height: auto">
             {{ copyright }}
           </div>
         </el-col>

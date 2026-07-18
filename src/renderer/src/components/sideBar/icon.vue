@@ -22,10 +22,7 @@ const className = computed(() => {
 </script>
 
 <template>
-  <span
-    :class="className"
-    class="file-icon"
-  />
+  <span :class="className" class="file-icon" />
 </template>
 
 <style scoped>

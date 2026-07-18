@@ -4,19 +4,14 @@
     <el-checkbox v-model="uploaderService.agreedToLegalNotices" />
     <span>
       {{ t('preferences.image.uploader.legalNotices.byUsing', { name: uploaderService.name }) }}
-      <span
-        class="link"
-        @click="openUrl(uploaderService.privacyUrl)"
-      >{{
+      <span class="link" @click="openUrl(uploaderService.privacyUrl)">{{
         t('preferences.image.uploader.legalNotices.privacyStatement')
       }}</span>
       {{ t('preferences.image.uploader.legalNotices.and') }}
-      <span
-        class="link"
-        @click="openUrl(uploaderService.tosUrl)"
-      >{{
+      <span class="link" @click="openUrl(uploaderService.tosUrl)">{{
         t('preferences.image.uploader.legalNotices.termsOfService')
-      }}</span>.
+      }}</span
+      >.
       <span v-if="!uploaderService.isGdprCompliant">{{
         t('preferences.image.uploader.legalNotices.gdprWarning')
       }}</span>

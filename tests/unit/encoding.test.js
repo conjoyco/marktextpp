@@ -6,7 +6,9 @@ describe('encoding utilities', () => {
     it('should return mapped encoding name for known encodings', () => {
       expect(getEncodingName({ encoding: 'utf8', isBom: false })).toBe('UTF-8')
       expect(getEncodingName({ encoding: 'utf16le', isBom: false })).toBe('UTF-16 LE')
-      expect(getEncodingName({ encoding: 'gb2312', isBom: false })).toBe('Simplified Chinese (GB2312)')
+      expect(getEncodingName({ encoding: 'gb2312', isBom: false })).toBe(
+        'Simplified Chinese (GB2312)'
+      )
     })
 
     it('should append "with BOM" when isBom is true', () => {

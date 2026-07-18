@@ -416,9 +416,9 @@ const paragraphCtrl = (ContentState) => {
     const value =
       anchor.type === 'p'
         ? anchor.children
-          .map((child) => child.text)
-          .join('\n')
-          .trim()
+            .map((child) => child.text)
+            .join('\n')
+            .trim()
         : ''
 
     const containerBlock = this.createContainerBlock(functionType, value)

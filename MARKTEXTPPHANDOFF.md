@@ -23,8 +23,8 @@ already does the inline-WYSIWYG part; the fork is the base we improve.
 ## Repo + remotes (already configured)
 
 - Working copy: `C:\dev\marktextpp` (repo root, `.git` here).
-- `origin`   → https://github.com/conjoyco/marktextpp.git  (the user's, owned by conjoyco org)
-- `upstream` → https://github.com/peterjthomson/marktext.git  (pull future updates from here)
+- `origin` → https://github.com/conjoyco/marktextpp.git (the user's, owned by conjoyco org)
+- `upstream` → https://github.com/peterjthomson/marktext.git (pull future updates from here)
 - Branch: `master`.
 - Note: folder is `marktextpp` but the app's internal name is still
   `marktext` (package.json `"name"`, and build artifacts like
@@ -39,7 +39,7 @@ already does the inline-WYSIWYG part; the fork is the base we improve.
   installed **nvm-windows** (`C:\nvm4w\nodejs\...`) — use `nvm use 22.21.1`
   in an **admin** cmd before building. Do NOT build on Node 24.
 - Python 3.14.3 is what node-gyp picks up. It got far enough (found VS, ran
-  MSBuild) so it's not the current blocker, but flag it if a *different*
+  MSBuild) so it's not the current blocker, but flag it if a _different_
   native module later fails inside gyp/python rather than at MSBuild.
 - Package manager: **npm** (not yarn).
 
@@ -47,21 +47,23 @@ already does the inline-WYSIWYG part; the fork is the base we improve.
 
 The app now **builds and runs**. `dist\win-unpacked\marktext.exe` launches
 clean, and `dist\marktext-win-x64-1.3.0.zip` is the portable deliverable.
-Getting there took untangling two *separate* problems that both look like
+Getting there took untangling two _separate_ problems that both look like
 "native build fails on Windows":
 
 ### 1. Spectre libs / wrong toolset (the MSB8040 error) — FIXED
 
 `npm install` failed building `native-keymap` with:
+
 ```
 error MSB8040: Spectre-mitigated libraries are required for this project.
 ```
+
 The spectre component WAS eventually installed — but only for the **"(Latest)"
 MSVC toolset 14.44.35207**. The catch: this machine's default `v143` platform
 toolset resolves to **14.38.33130** (see
 `VC\Auxiliary\Build\Microsoft.VCToolsVersion.v143.default.txt` = 14.38, while
 `Microsoft.VCToolsVersion.default.txt` = 14.44). So node-gyp built against
-14.38, which had no spectre libs → MSB8040, *even though 14.44 had them*.
+14.38, which had no spectre libs → MSB8040, _even though 14.44 had them_.
 
 Fix (already committed to the repo): force native builds onto 14.44 via the
 `VCToolsVersion` env var. `Directory.Build.props` does NOT work here —
@@ -69,15 +71,18 @@ node-gyp's generated `.vcxproj` imports `Microsoft.Cpp.props` directly and
 never imports `Microsoft.Common.props`, so `Directory.Build.props` is never
 read. The env var is the only reliable lever. It's baked into **package.json
 scripts** with `cross-env` (already a devDep):
+
 - `rebuild-native` and `build:win` are prefixed
   `cross-env VCToolsVersion=14.44.35207 ...`.
 
-Caveat: a *fresh* `npm install` has no script hook, so it still needs the env
+Caveat: a _fresh_ `npm install` has no script hook, so it still needs the env
 var. Run installs as:
+
 ```
 set VCToolsVersion=14.44.35207   &&  npm install     (cmd)
 $env:VCToolsVersion="14.44.35207"; npm install       (pwsh)
 ```
+
 Alternative permanent fixes if you dislike the env var: (a) tick the VS
 installer box for **14.38 (17.8, "Out of Support")** spectre libs too, or
 (b) edit `Microsoft.VCToolsVersion.v143.default.txt` → 14.44. Both are
@@ -88,15 +93,18 @@ favor of the repo-scoped script env var.
 
 `npm run build:win` gets all the way to packaging, produces `win-unpacked\`
 (the real, runnable app), then FAILS extracting the `winCodeSign` cache:
+
 ```
 Cannot create symbolic link : A required privilege is not held by the client.
   ...winCodeSign\...\darwin\10.12\lib\libcrypto.dylib
 ```
+
 electron-builder always extracts winCodeSign for win targets; that archive
 contains macOS dylib **symlinks**, and creating symlinks on Windows needs
 `SeCreateSymbolicLinkPrivilege`. A non-elevated shell doesn't have it → both
 `zip` and `nsis` targets fail. **This is why the original handoff said build
 from an admin cmd.** Fixes:
+
 - Run `npm run build:win` from an **elevated (Run as administrator)** terminal, OR
 - Enable **Windows Settings → System → For developers → Developer Mode** once
   (grants the symlink privilege to the normal user; no elevation needed after).
@@ -120,15 +128,17 @@ npm run build:win      # RUN ELEVATED (admin) or with Developer Mode on — see 
 ```
 
 Portable (no-install) output lands in `C:\dev\marktextpp\dist\`:
-- `marktext-win-x64-1.3.0.zip`  ← unzip anywhere, run `marktext.exe`. This is
+
+- `marktext-win-x64-1.3.0.zip` ← unzip anywhere, run `marktext.exe`. This is
   the "no install version" the user wants.
-- `marktext-win-x64-1.3.0-setup.exe`  ← nsis installer, ignore.
+- `marktext-win-x64-1.3.0-setup.exe` ← nsis installer, ignore.
 
 Build config lives in `electron-builder.yml` (`win:` targets = nsis + zip).
 
 ## Feature roadmap (DEFERRED — do not start unasked)
 
 The user said "later, if it bothers me." In rough order:
+
 1. 3-way toggle: **raw | side-by-side | pretty**.
 2. Draggable vertical separator on the split view (resize either pane).
 3. True bidirectional live sync (edit either pane, other updates) — MarkText's

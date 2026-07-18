@@ -126,6 +126,7 @@ Cross-compilation is **not recommended** due to native module dependencies.
 For local release builds with notarization:
 
 1. **Set up credentials** (one-time):
+
    ```bash
    xcrun notarytool store-credentials "AC_PASSWORD" \
      --apple-id "YOUR_APPLE_ID" \
@@ -133,6 +134,7 @@ For local release builds with notarization:
    ```
 
 2. **Configure environment**:
+
    ```bash
    cp .env.example .env
    # Edit .env with your keychain profile name

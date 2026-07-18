@@ -13,6 +13,7 @@ When you open a markdown file in MarkText, it parses the content into an interna
 This means that editing one paragraph could cause whitespace changes throughout the entire file, making git diffs noisy and hard to review.
 
 **Related upstream issues:**
+
 - [marktext/marktext#2148](https://github.com/marktext/marktext/issues/2148): "don't modify file when I don't modify it"
 - [marktext/marktext#2189](https://github.com/marktext/marktext/issues/2189): "Document is modified when opened/Markdown formatting"
 - [marktext/marktext#1354](https://github.com/marktext/marktext/issues/1354): "Automatic Removal of Empty Lines"
@@ -69,14 +70,14 @@ To toggle it:
 
 Light Touch mode:
 
-| Scenario | Behavior |
-|----------|----------|
-| No changes made | Original file saved exactly |
-| One block edited | Only that block reformatted |
-| Multiple blocks edited | Only changed blocks reformatted |
-| New block added | New block uses standard formatting |
-| Block deleted | Removed from output |
-| Setting disabled | Full file regenerated (standard behavior) |
+| Scenario               | Behavior                                  |
+| ---------------------- | ----------------------------------------- |
+| No changes made        | Original file saved exactly               |
+| One block edited       | Only that block reformatted               |
+| Multiple blocks edited | Only changed blocks reformatted           |
+| New block added        | New block uses standard formatting        |
+| Block deleted          | Removed from output                       |
+| Setting disabled       | Full file regenerated (standard behavior) |
 
 ## Benefits
 

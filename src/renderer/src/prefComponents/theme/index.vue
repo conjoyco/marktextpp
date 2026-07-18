@@ -67,10 +67,7 @@
       />
     </div>
     <separator v-show="false" />
-    <section
-      v-show="false"
-      class="import-themes ag-underdevelop"
-    >
+    <section v-show="false" class="import-themes ag-underdevelop">
       <div>
         <span>{{ t('preferences.theme.openThemesFolder') }}</span>
         <el-button size="small">

@@ -17,10 +17,7 @@
         :options="uploaderOptions"
         :on-change="(value) => setCurrentUploader(value)"
       />
-      <div
-        v-if="currentUploader === 'picgo'"
-        class="picgo"
-      >
+      <div v-if="currentUploader === 'picgo'" class="picgo">
         <div class="detection-status">
           <div class="detection-header">
             <h6>{{ t('preferences.image.uploader.picgoDetection') }}</h6>
@@ -50,10 +47,7 @@
                 <!-- 加载动画和状态指示器 -->
                 <div class="detection-animation-container">
                   <!-- 初始按钮（0.5秒后变为动画） -->
-                  <button
-                    v-if="showInitialButton"
-                    class="initial-button"
-                  >
+                  <button v-if="showInitialButton" class="initial-button">
                     <svg
                       width="14"
                       height="14"
@@ -62,11 +56,7 @@
                       stroke="currentColor"
                       stroke-width="2"
                     >
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="10"
-                      />
+                      <circle cx="12" cy="12" r="10" />
                       <path d="m9 12 2 2 4-4" />
                     </svg>
                   </button>
@@ -115,24 +105,15 @@
             <div class="status-text">
               {{ picgoDetectionStatus || t('preferences.image.uploader.picgoNotInstalled') }}
             </div>
-            <div
-              v-if="lastDetectionTime"
-              class="detection-time"
-            >
+            <div v-if="lastDetectionTime" class="detection-time">
               {{ t('preferences.image.uploader.lastDetectionTime') }}:
               {{ formatDetectionTime(lastDetectionTime) }}
             </div>
-            <div
-              v-if="lastSuccessTime"
-              class="success-time"
-            >
+            <div v-if="lastSuccessTime" class="success-time">
               {{ t('preferences.image.uploader.lastSuccessTime') }}: {{ getLastSuccessTime() }}
             </div>
           </div>
-          <div
-            v-if="!picgoExists"
-            class="install-commands"
-          >
+          <div v-if="!picgoExists" class="install-commands">
             <div class="install-title">
               {{ t('preferences.image.uploader.chooseInstallMethod') }}
             </div>
@@ -157,10 +138,7 @@
               </div>
             </div>
             <div class="install-link">
-              <span
-                class="link"
-                @click="open('https://github.com/PicGo/PicGo-Core')"
-              >picgo</span>
+              <span class="link" @click="open('https://github.com/PicGo/PicGo-Core')">picgo</span>
               {{ t('preferences.image.uploader.pleaseInstall') }}
             </div>
           </div>
@@ -194,28 +172,19 @@
               </div>
             </div>
             <div class="usage-link">
-              <span
-                class="link"
-                @click="open('https://picgo.github.io/PicGo-Core-Doc/')"
-              >{{
+              <span class="link" @click="open('https://picgo.github.io/PicGo-Core-Doc/')">{{
                 t('preferences.image.uploader.usageGuide.documentation')
               }}</span>
             </div>
           </div>
 
-          <details
-            v-if="picgoDetectionFailed && picgoDebugInfo"
-            class="debug-info"
-          >
+          <details v-if="picgoDetectionFailed && picgoDebugInfo" class="debug-info">
             <summary>{{ t('preferences.image.uploader.debugInfo') }}</summary>
             <pre>{{ picgoDebugInfo || '暂无调试信息' }}</pre>
           </details>
         </div>
       </div>
-      <div
-        v-if="currentUploader === 'github'"
-        class="github"
-      >
+      <div v-if="currentUploader === 'github'" class="github">
         <div class="warning">
           {{ t('preferences.image.uploader.githubDeprecated') }}
         </div>
@@ -228,10 +197,7 @@
               :content="t('preferences.image.uploader.tokenTooltip')"
               placement="top-start"
             >
-              <InfoFilled
-                width="16"
-                height="16"
-              />
+              <InfoFilled width="16" height="16" />
             </el-tooltip>
           </div>
           <el-input
@@ -241,9 +207,7 @@
           />
         </div>
         <div class="form-group">
-          <div class="label">
-            {{ t('preferences.image.uploader.ownerName') }}:
-          </div>
+          <div class="label">{{ t('preferences.image.uploader.ownerName') }}:</div>
           <el-input
             v-model="github.owner"
             :placeholder="t('preferences.image.uploader.owner')"
@@ -251,9 +215,7 @@
           />
         </div>
         <div class="form-group">
-          <div class="label">
-            {{ t('preferences.image.uploader.repoName') }}:
-          </div>
+          <div class="label">{{ t('preferences.image.uploader.repoName') }}:</div>
           <el-input
             v-model="github.repo"
             :placeholder="t('preferences.image.uploader.repo')"
@@ -261,9 +223,7 @@
           />
         </div>
         <div class="form-group">
-          <div class="label">
-            {{ t('preferences.image.uploader.branchName') }}:
-          </div>
+          <div class="label">{{ t('preferences.image.uploader.branchName') }}:</div>
           <el-input
             v-model="github.branch"
             :placeholder="t('preferences.image.uploader.branch')"
@@ -276,26 +236,17 @@
           :uploader-service="uploadServices.github"
         />
         <div class="form-group">
-          <el-button
-            size="mini"
-            :disabled="githubDisable"
-            @click="save('github')"
-          >
+          <el-button size="mini" :disabled="githubDisable" @click="save('github')">
             {{ t('preferences.image.uploader.save') }}
           </el-button>
         </div>
       </div>
-      <div
-        v-else-if="currentUploader === 'cliScript'"
-        class="script"
-      >
+      <div v-else-if="currentUploader === 'cliScript'" class="script">
         <div class="description">
           {{ t('preferences.image.uploader.scriptDescription') }}
         </div>
         <div class="form-group">
-          <div class="label">
-            {{ t('preferences.image.uploader.scriptLocation') }}:
-          </div>
+          <div class="label">{{ t('preferences.image.uploader.scriptLocation') }}:</div>
           <el-input
             v-model="cliScript"
             :placeholder="t('preferences.image.uploader.scriptPath')"
@@ -303,11 +254,7 @@
           />
         </div>
         <div class="form-group">
-          <el-button
-            size="mini"
-            :disabled="cliScriptDisable"
-            @click="save('cliScript')"
-          >
+          <el-button size="mini" :disabled="cliScriptDisable" @click="save('cliScript')">
             {{ t('preferences.image.uploader.save') }}
           </el-button>
         </div>

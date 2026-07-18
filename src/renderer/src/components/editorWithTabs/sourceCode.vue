@@ -1,8 +1,5 @@
 <template>
-  <div
-    ref="sourceCodeContainer"
-    class="source-code"
-  />
+  <div ref="sourceCodeContainer" class="source-code" />
 </template>
 
 <script setup>

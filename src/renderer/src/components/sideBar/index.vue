@@ -26,10 +26,7 @@
         </li>
       </ul>
     </div>
-    <div
-      v-show="rightColumn"
-      class="right-column"
-    >
+    <div v-show="rightColumn" class="right-column">
       <tree
         v-if="rightColumn === 'files'"
         :project-tree="projectTree"
@@ -39,11 +36,7 @@
       <side-bar-search v-else-if="rightColumn === 'search'" />
       <toc v-else-if="rightColumn === 'toc'" />
     </div>
-    <div
-      v-show="rightColumn"
-      ref="dragBar"
-      class="drag-bar"
-    />
+    <div v-show="rightColumn" ref="dragBar" class="drag-bar" />
   </div>
 </template>
 
