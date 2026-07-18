@@ -46,7 +46,9 @@ jobs:
         include:
           - os: ubuntu-22.04
             platform: linux
-          - os: windows-latest
+          # windows-latest ships Visual Studio 2026, which node-gyp cannot
+          # detect yet; pin to the VS 2022 image
+          - os: windows-2022
             platform: windows
           - os: macos-latest
             platform: mac
@@ -112,10 +114,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Passing an empty CSC_LINK makes electron-builder try to load a
+      # certificate from an empty path, so detect the secrets first
+      - name: Check for Mac signing secrets
+        if: matrix.platform == 'mac'
+        run: echo "HAS_MAC_CERTS=${{ secrets.MAC_CERTS != '' }}" >> $GITHUB_ENV
+
       # Build for Mac with code signing and notarization
       # Requires: APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD, APPLE_TEAM_ID secrets
       - name: Build Mac
-        if: matrix.platform == 'mac'
+        if: matrix.platform == 'mac' && env.HAS_MAC_CERTS == 'true'
         run: npm run build:mac
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -126,6 +134,15 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+
+      # Without signing secrets, ship an unsigned build; users bypass
+      # Gatekeeper with: xattr -cr /Applications/MarkText.app
+      - name: Build Mac (unsigned)
+        if: matrix.platform == 'mac' && env.HAS_MAC_CERTS != 'true'
+        run: npm run minify-locales && npx @electron/rebuild && npm run build && npx electron-builder --mac --publish never -c.mac.notarize=false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
       # Build for Windows
       - name: Build Windows

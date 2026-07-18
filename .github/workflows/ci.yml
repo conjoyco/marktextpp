@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
+        os: [ubuntu-22.04, windows-2022, macos-latest]
 
     steps:
       - name: Check out Git repository
