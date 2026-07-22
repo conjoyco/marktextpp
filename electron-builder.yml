@@ -1,5 +1,7 @@
 appId: com.electron.app
-productName: marktext
+# Display name (installer, shortcuts, titlebars). Executable/artifact names stay
+# "marktext" so stable download URLs and the auto-update feed keep working.
+productName: MarkText++
 # Where electron-updater looks for new releases (embedded as app-update.yml);
 # CI builds run with --publish never, so electron-builder itself never uploads
 publish:

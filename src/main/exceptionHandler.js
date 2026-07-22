@@ -87,7 +87,7 @@ ${title}.
 
 ### Version
 
-MarkText: ${MARKTEXT_VERSION_STRING}
+MarkText++: ${MARKTEXT_VERSION_STRING}
 Operating system: ${getOSInformation()}`
         )
         break
