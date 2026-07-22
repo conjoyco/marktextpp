@@ -20,30 +20,8 @@ export const useAutoUpdatesStore = defineStore('autoUpdates', {
           message
         })
       })
-      window.electron.ipcRenderer.on('mt::UPDATE_DOWNLOADED', (_, message) => {
-        notice.notify({
-          title: 'Update Downloaded',
-          type: 'info',
-          message
-        })
-      })
-      window.electron.ipcRenderer.on('mt::UPDATE_AVAILABLE', (_, message) => {
-        notice
-          .notify({
-            title: 'Update Available',
-            type: 'primary',
-            message,
-            showConfirm: true
-          })
-          .then(() => {
-            const needUpdate = true
-            window.electron.ipcRenderer.send('mt::NEED_UPDATE', { needUpdate })
-          })
-          .catch(() => {
-            const needUpdate = false
-            window.electron.ipcRenderer.send('mt::NEED_UPDATE', { needUpdate })
-          })
-      })
+      // An available update now opens the dedicated updater window from the main
+      // process (src/main/updater); no editor-side prompt anymore.
     }
   }
 })

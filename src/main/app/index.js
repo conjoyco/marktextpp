@@ -10,7 +10,7 @@ import parseArgs from '../cli/parser'
 import { normalizeAndResolvePath } from '../filesystem'
 import { normalizeMarkdownPath } from '../filesystem/markdown'
 import { registerKeyboardListeners } from '../keyboard'
-import { checkUpdatesSilently } from '../menu/actions/marktext'
+import { checkUpdatesSilently, initUpdater } from '../updater'
 import { selectTheme } from '../menu/actions/theme'
 import { dockMenu } from '../menu/templates'
 import registerSpellcheckerListeners from '../spellchecker'
@@ -367,6 +367,7 @@ class App {
       createWindow()
     }
 
+    initUpdater(preferences)
     const { autoCheckUpdates } = preferences.getAll()
     if (autoCheckUpdates) {
       setTimeout(() => {
