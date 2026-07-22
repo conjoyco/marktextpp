@@ -105,11 +105,36 @@ export const useEditorStore = defineStore('editor', {
         showConfirm,
         style,
         exclusiveType,
-        action
+        action,
+        // Optional button labels. When set, the confirm/close controls render as
+        // text buttons instead of the default "OK" and close icon.
+        confirmText: data.confirmText || '',
+        closeText: data.closeText || ''
       })
     },
 
-    loadChange(change) {
+    /**
+     * Remove a tab notification of the given exclusive type without invoking its action.
+     */
+    dismissTabNotification(tabId, exclusiveType) {
+      const tab = this.tabs.find((t) => t.id === tabId)
+      if (!tab || !exclusiveType) {
+        return
+      }
+      const index = tab.notifications.findIndex((n) => n.exclusiveType === exclusiveType)
+      if (index >= 0) {
+        tab.notifications.splice(index, 1)
+      }
+    },
+
+    /**
+     * Replace a tab's content with the state loaded from disk.
+     *
+     * With `preserveView` the cursor (as offset-based muyaIndexCursor) and the
+     * scroll position survive the reload so an external change appears in place,
+     * Sublime-style, without the viewport jumping.
+     */
+    loadChange(change, { preserveView = false } = {}) {
       const { tabs, currentFile } = this
       const { data, pathname } = change
       const {
@@ -142,6 +167,10 @@ export const useEditorStore = defineStore('editor', {
       // Backup few entries that we need to restore later.
       const oldId = tab.id
       const oldNotifications = tab.notifications
+      // Offset-based cursor and scroll position for in-place reloads. Both are
+      // resilient against the content re-import (unlike block-key cursors).
+      const oldMuyaIndexCursor = tab.muyaIndexCursor
+      const oldScrollTop = tab.scrollTop
       let oldHistory = null
       if (tab.history.index >= 0 && tab.history.stack.length >= 1) {
         // Allow to restore the old document.
@@ -176,8 +205,12 @@ export const useEditorStore = defineStore('editor', {
         })
       }
 
+      // The reload resolves any pending external-change conflict.
+      tab.externallyChanged = false
+      this.dismissTabNotification(tab.id, 'file_changed')
+
       // Reload the editor if the tab is currently opened.
-      if (pathname === currentFile.pathname) {
+      if (window.fileUtils.isSamePathSync(pathname, currentFile.pathname)) {
         // save current state first
         this.currentFile = tab
         const { id, cursor, history, scrollTop } = tab // Should not use blocks history as this is loaded from disk
@@ -187,7 +220,8 @@ export const useEditorStore = defineStore('editor', {
           cursor,
           renderCursor: true,
           history,
-          scrollTop
+          muyaIndexCursor: preserveView ? oldMuyaIndexCursor : undefined,
+          scrollTop: preserveView && typeof oldScrollTop === 'number' ? oldScrollTop : scrollTop
         })
       }
     },
@@ -405,6 +439,11 @@ export const useEditorStore = defineStore('editor', {
             tab.originalMarkdown = tab.markdown
           }
 
+          // An explicit save resolves any external-change conflict: the user's
+          // version just overwrote disk.
+          tab.externallyChanged = false
+          this.dismissTabNotification(id, 'file_changed')
+
           pendingSavedMarkdown.delete(id)
         }
         // Clear the saving spinner with minimum display time
@@ -434,6 +473,13 @@ export const useEditorStore = defineStore('editor', {
             // No pending save record means user canceled save dialog
             // Keep current unsaved state
             tab.isSaved = false
+          }
+
+          if (savedMarkdown) {
+            // An explicit save resolves any external-change conflict: the user's
+            // version just overwrote disk.
+            tab.externallyChanged = false
+            this.dismissTabNotification(tabId, 'file_changed')
           }
 
           pendingSavedMarkdown.delete(tabId)
@@ -1168,6 +1214,13 @@ export const useEditorStore = defineStore('editor', {
       const projectStore = useProjectStore()
       const { autoSaveDelay, lightTouch } = preferencesStore
 
+      // An unresolved external change suspends autosave for this tab — a stale
+      // buffer must never overwrite newer disk content without the user choosing.
+      const conflictedTab = this.tabs.find((t) => t.id === id)
+      if (conflictedTab && conflictedTab.externallyChanged) {
+        return
+      }
+
       if (autoSaveTimers.has(id)) {
         const timer = autoSaveTimers.get(id)
         clearTimeout(timer)
@@ -1178,7 +1231,7 @@ export const useEditorStore = defineStore('editor', {
         autoSaveTimers.delete(id)
 
         const tab = this.tabs.find((t) => t.id === id)
-        if (tab && !tab.isSaved) {
+        if (tab && !tab.isSaved && !tab.externallyChanged) {
           const defaultPath = getRootFolderFromState(projectStore)
           // Apply Light Touch mode: use original markdown if no semantic changes
           const markdownToSave = getMarkdownForSave(markdown, tab.originalMarkdown, lightTouch)
@@ -1328,44 +1381,85 @@ export const useEditorStore = defineStore('editor', {
         const { pathname } = change
         const tab = tabs.find((t) => window.fileUtils.isSamePathSync(t.pathname, pathname))
         if (tab) {
-          const { id, isSaved, filename } = tab
+          const { id, filename } = tab
+          const clearPendingAutoSave = () => {
+            if (autoSaveTimers.has(id)) {
+              clearTimeout(autoSaveTimers.get(id))
+              autoSaveTimers.delete(id)
+            }
+          }
           switch (type) {
             case 'unlink': {
+              // The buffer is now the only copy: mark unsaved so closing prompts,
+              // and suspend autosave so a stale buffer doesn't silently recreate
+              // the file the user just deleted elsewhere.
+              clearPendingAutoSave()
               tab.isSaved = false
+              tab.externallyChanged = true
               this.pushTabNotification({
                 tabId: id,
                 msg: i18n.global.t('store.editor.fileRemovedOnDisk', { name: filename }),
                 style: 'warn',
                 showConfirm: false,
-                exclusiveType: 'file_changed'
+                exclusiveType: 'file_changed',
+                action: () => {
+                  // Dismissing means "keep my version": the next save recreates the file.
+                  const t = this.tabs.find((x) => x.id === id)
+                  if (t) {
+                    t.externallyChanged = false
+                  }
+                }
               })
               break
             }
             case 'add':
             case 'change': {
-              const { autoSave } = preferencesStore
-              if (autoSave) {
-                if (autoSaveTimers.has(id)) {
-                  const timer = autoSaveTimers.get(id)
-                  clearTimeout(timer)
-                  autoSaveTimers.delete(id)
-                }
+              const { autoSave, autoReloadCleanTabs } = preferencesStore
+              const diskMarkdown = change.data ? change.data.markdown : null
 
-                if (isSaved) {
-                  this.loadChange(change)
-                  return
-                }
+              // Content comparison (not just timestamps): if disk now matches the
+              // buffer this is our own save echoing back or an equivalent write —
+              // never reload, so self-saves can't cause reload loops.
+              if (typeof diskMarkdown === 'string' && diskMarkdown === tab.markdown) {
+                tab.isSaved = true
+                tab.originalMarkdown = diskMarkdown
+                tab.externallyChanged = false
+                this.dismissTabNotification(id, 'file_changed')
+                break
               }
 
-              tab.isSaved = false
+              // "Clean" means no unsaved edits: either flagged as saved, or the
+              // buffer still equals the on-load/on-save baseline (the isSaved flag
+              // is also cleared by unlink events, so check the content too).
+              const isClean = tab.isSaved || tab.markdown === tab.originalMarkdown
+              if (isClean && (autoReloadCleanTabs || autoSave)) {
+                // Sublime-style: reload silently in place, keeping cursor + scroll.
+                clearPendingAutoSave()
+                this.loadChange(change, { preserveView: true })
+                break
+              }
+
+              // Dirty buffer (or silent reload disabled): never clobber either
+              // side silently. Suspend autosave and let the user pick a side.
+              clearPendingAutoSave()
+              tab.externallyChanged = true
               this.pushTabNotification({
                 tabId: id,
                 msg: i18n.global.t('store.editor.fileChangedOnDisk', { name: filename }),
+                style: 'warn',
                 showConfirm: true,
+                confirmText: i18n.global.t('store.editor.reloadFromDisk'),
+                closeText: i18n.global.t('store.editor.keepMyVersion'),
                 exclusiveType: 'file_changed',
                 action: (status) => {
                   if (status) {
-                    this.loadChange(change)
+                    this.loadChange(change, { preserveView: true })
+                  } else {
+                    // Keep my version: the next (auto)save overwrites disk.
+                    const t = this.tabs.find((x) => x.id === id)
+                    if (t) {
+                      t.externallyChanged = false
+                    }
                   }
                 }
               })

@@ -464,7 +464,8 @@
       "autoSave": {
         "title": "Auto Save",
         "description": "Auto save",
-        "delayDescription": "Auto save delay"
+        "delayDescription": "Auto save delay",
+        "autoReloadCleanTabs": "Reload files changed on disk when there are no unsaved changes"
       },
       "window": {
         "title": "Window",
@@ -1104,7 +1105,9 @@
       "exportSuccessTitle": "Exported successfully",
       "exportSuccessMessage": "Exported \"{name}\" successfully!",
       "fileRemovedOnDisk": "\"{name}\" has been removed on disk.",
-      "fileChangedOnDisk": "\"{name}\" has been changed on disk. Do you want to reload it?"
+      "fileChangedOnDisk": "\"{name}\" has been changed on disk. Do you want to reload it?",
+      "reloadFromDisk": "Reload from disk",
+      "keepMyVersion": "Keep my version"
     },
     "help": {
       "lineEndingAssertionError": "Line ending assertion error"
@@ -1279,9 +1282,19 @@
     "words": {},
     "image": {
       "selector": {
-        "tab": { "select": "Select", "embedLink": "Embed link" },
-        "select": { "chooseButton": "Choose Image", "tip": "Choose image from your computer." },
-        "inputs": { "alt": "Alt text", "src": "Image link or local path", "title": "Image title" },
+        "tab": {
+          "select": "Select",
+          "embedLink": "Embed link"
+        },
+        "select": {
+          "chooseButton": "Choose Image",
+          "tip": "Choose image from your computer."
+        },
+        "inputs": {
+          "alt": "Alt text",
+          "src": "Image link or local path",
+          "title": "Image title"
+        },
         "embedButton": "Embed Image",
         "hint": {
           "prefix": "Paste web image or local image path. Use",

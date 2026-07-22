@@ -464,7 +464,8 @@
       "autoSave": {
         "title": "自動保存",
         "description": "自動保存",
-        "delayDescription": "自動保存の遅延"
+        "delayDescription": "自動保存の遅延",
+        "autoReloadCleanTabs": "未保存の変更がない場合、ディスク上で変更されたファイルを自動的に再読み込みする"
       },
       "window": {
         "title": "ウィンドウ",
@@ -1095,7 +1096,9 @@
       "exportSuccessTitle": "エクスポートに成功",
       "exportSuccessMessage": "「{name}」を正常にエクスポートしました！",
       "fileRemovedOnDisk": "「{name}」はディスク上で削除されました。",
-      "fileChangedOnDisk": "「{name}」はディスク上で変更されました。再読み込みしますか？"
+      "fileChangedOnDisk": "「{name}」はディスク上で変更されました。再読み込みしますか？",
+      "reloadFromDisk": "ディスクから再読み込み",
+      "keepMyVersion": "自分の変更を保持"
     },
     "help": {
       "lineEndingAssertionError": "改行コードアサーションエラー"

@@ -463,7 +463,8 @@
       "autoSave": {
         "title": "Guardado Automático",
         "description": "Guardado automático",
-        "delayDescription": "Retraso del guardado automático"
+        "delayDescription": "Retraso del guardado automático",
+        "autoReloadCleanTabs": "Recargar archivos modificados en disco cuando no hay cambios sin guardar"
       },
       "window": {
         "title": "Ventana",
@@ -1093,7 +1094,9 @@
       "exportSuccessTitle": "Exportado correctamente",
       "exportSuccessMessage": "¡Se exportó «{name}» correctamente!",
       "fileRemovedOnDisk": "«{name}» ha sido eliminado del disco.",
-      "fileChangedOnDisk": "«{name}» ha cambiado en el disco. ¿Deseas recargarlo?"
+      "fileChangedOnDisk": "«{name}» ha cambiado en el disco. ¿Deseas recargarlo?",
+      "reloadFromDisk": "Recargar desde disco",
+      "keepMyVersion": "Mantener mi versión"
     },
     "help": {
       "lineEndingAssertionError": "Error de aserción de final de línea"

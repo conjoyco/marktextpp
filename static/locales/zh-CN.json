@@ -464,7 +464,8 @@
       "autoSave": {
         "title": "自动保存",
         "description": "自动保存",
-        "delayDescription": "自动保存延迟"
+        "delayDescription": "自动保存延迟",
+        "autoReloadCleanTabs": "当没有未保存的更改时，自动重新加载磁盘上已更改的文件"
       },
       "window": {
         "title": "窗口",
@@ -1102,7 +1103,9 @@
       "exportSuccessTitle": "导出成功",
       "exportSuccessMessage": "已成功导出“{name}”！",
       "fileRemovedOnDisk": "“{name}” 已在磁盘上被删除。",
-      "fileChangedOnDisk": "“{name}” 已在磁盘上发生变更。是否重新加载？"
+      "fileChangedOnDisk": "“{name}” 已在磁盘上发生变更。是否重新加载？",
+      "reloadFromDisk": "从磁盘重新加载",
+      "keepMyVersion": "保留我的版本"
     },
     "help": {
       "lineEndingAssertionError": "行结束符断言错误"

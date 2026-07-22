@@ -9,6 +9,10 @@ import { i18n } from '../i18n'
 export const defaultFileState = {
   // Indicates whether there are unsaved changes.
   isSaved: true,
+  // The file changed on disk while the buffer had unsaved changes and the user
+  // hasn't chosen a side yet. While set, autosave is suspended for this tab so a
+  // stale buffer can never silently overwrite newer disk content.
+  externallyChanged: false,
   // Full path to the file or empty. If the value is empty the file doesn't exist on disk.
   pathname: '',
   filename: 'Untitled-1',

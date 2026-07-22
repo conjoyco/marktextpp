@@ -464,7 +464,8 @@
       "autoSave": {
         "title": "Salvamento Automático",
         "description": "Salvamento automático",
-        "delayDescription": "Atraso do salvamento automático"
+        "delayDescription": "Atraso do salvamento automático",
+        "autoReloadCleanTabs": "Recarregar arquivos alterados no disco quando não houver alterações não salvas"
       },
       "window": {
         "title": "Janela",
@@ -1095,7 +1096,9 @@
       "exportSuccessTitle": "Exportado com sucesso",
       "exportSuccessMessage": "“{name}” foi exportado com sucesso!",
       "fileRemovedOnDisk": "“{name}” foi removido no disco.",
-      "fileChangedOnDisk": "“{name}” foi alterado no disco. Deseja recarregar?"
+      "fileChangedOnDisk": "“{name}” foi alterado no disco. Deseja recarregar?",
+      "reloadFromDisk": "Recarregar do disco",
+      "keepMyVersion": "Manter minha versão"
     },
     "help": {
       "lineEndingAssertionError": "Erro de asserção de terminação de linha"

@@ -464,7 +464,8 @@
       "autoSave": {
         "title": "自動儲存",
         "description": "自動儲存",
-        "delayDescription": "自動儲存延遲"
+        "delayDescription": "自動儲存延遲",
+        "autoReloadCleanTabs": "當沒有未儲存的變更時，自動重新載入磁碟上已變更的檔案"
       },
       "window": {
         "title": "視窗",
@@ -1095,7 +1096,9 @@
       "exportSuccessTitle": "匯出成功",
       "exportSuccessMessage": "已成功匯出「{name}」！",
       "fileRemovedOnDisk": "「{name}」已在磁碟上被刪除。",
-      "fileChangedOnDisk": "「{name}」已在磁碟上發生變更。是否重新載入？"
+      "fileChangedOnDisk": "「{name}」已在磁碟上發生變更。是否重新載入？",
+      "reloadFromDisk": "從磁碟重新載入",
+      "keepMyVersion": "保留我的版本"
     },
     "help": {
       "lineEndingAssertionError": "行結束符斷言錯誤"

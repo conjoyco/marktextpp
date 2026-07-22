@@ -96,7 +96,7 @@ const scrollToCords = (y) => {
   })
 }
 
-const handleFileChange = ({ id, markdown: newMarkdown, cursor, scrollTop }) => {
+const handleFileChange = ({ id, markdown: newMarkdown, cursor, scrollTop, muyaIndexCursor }) => {
   prepareTabSwitch()
 
   if (typeof newMarkdown === 'string') {
@@ -108,6 +108,10 @@ const handleFileChange = ({ id, markdown: newMarkdown, cursor, scrollTop }) => {
   if (cursor) {
     const { anchor, focus } = cursor
     editor.value.setSelection(anchor, focus, { scroll: true }) // Scroll the focus into view.
+  } else if (muyaIndexCursor && muyaIndexCursor.anchor && muyaIndexCursor.focus) {
+    // In-place reload from disk: restore the previous {line, ch} selection
+    // without scrolling — the caller restores the scroll position explicitly.
+    editor.value.setSelection(muyaIndexCursor.anchor, muyaIndexCursor.focus, { scroll: false })
   } else {
     setCursorAtFirstLine(editor.value)
   }

@@ -463,7 +463,8 @@
       "autoSave": {
         "title": "Automatisches Speichern",
         "description": "Automatisches Speichern",
-        "delayDescription": "Verzögerung beim automatischen Speichern"
+        "delayDescription": "Verzögerung beim automatischen Speichern",
+        "autoReloadCleanTabs": "Auf der Festplatte geänderte Dateien automatisch neu laden, wenn keine ungespeicherten Änderungen vorliegen"
       },
       "window": {
         "title": "Fenster",
@@ -1093,7 +1094,9 @@
       "exportSuccessTitle": "Erfolgreich exportiert",
       "exportSuccessMessage": "„{name}“ wurde erfolgreich exportiert!",
       "fileRemovedOnDisk": "„{name}“ wurde auf dem Datenträger gelöscht.",
-      "fileChangedOnDisk": "„{name}“ wurde auf dem Datenträger geändert. Möchten Sie neu laden?"
+      "fileChangedOnDisk": "„{name}“ wurde auf dem Datenträger geändert. Möchten Sie neu laden?",
+      "reloadFromDisk": "Von Festplatte neu laden",
+      "keepMyVersion": "Meine Version behalten"
     },
     "help": {
       "lineEndingAssertionError": "Zeilenendezeichen-Assertion-Fehler"

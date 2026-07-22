@@ -464,7 +464,8 @@
       "autoSave": {
         "title": "Enregistrement automatique",
         "description": "Enregistrement automatique",
-        "delayDescription": "Délai d'enregistrement automatique"
+        "delayDescription": "Délai d'enregistrement automatique",
+        "autoReloadCleanTabs": "Recharger les fichiers modifiés sur le disque lorsqu'il n'y a pas de modifications non enregistrées"
       },
       "window": {
         "title": "Fenêtre",
@@ -1095,7 +1096,9 @@
       "exportSuccessTitle": "Exportation réussie",
       "exportSuccessMessage": "« {name} » a été exporté avec succès !",
       "fileRemovedOnDisk": "« {name} » a été supprimé du disque.",
-      "fileChangedOnDisk": "« {name} » a été modifié sur le disque. Voulez-vous le recharger ?"
+      "fileChangedOnDisk": "« {name} » a été modifié sur le disque. Voulez-vous le recharger ?",
+      "reloadFromDisk": "Recharger depuis le disque",
+      "keepMyVersion": "Conserver ma version"
     },
     "help": {
       "lineEndingAssertionError": "Erreur d'assertion de fin de ligne"

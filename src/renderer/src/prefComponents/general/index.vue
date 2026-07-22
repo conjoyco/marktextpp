@@ -22,6 +22,11 @@
           :step="100"
           :on-change="(value) => onSelectChange('autoSaveDelay', value)"
         />
+        <bool
+          :description="t('preferences.general.autoSave.autoReloadCleanTabs')"
+          :bool="autoReloadCleanTabs"
+          :on-change="(value) => onSelectChange('autoReloadCleanTabs', value)"
+        />
       </template>
     </compound>
 
@@ -173,6 +178,7 @@ const preferenceStore = usePreferencesStore()
 const {
   autoSave,
   autoSaveDelay,
+  autoReloadCleanTabs,
   titleBarStyle,
   defaultDirectoryToOpen,
   openFilesInNewWindow,

@@ -10,6 +10,11 @@
     "minimum": 1000,
     "default": 5000
   },
+  "autoReloadCleanTabs": {
+    "description": "General--Silently reload a document that changed on disk when it has no unsaved changes.",
+    "type": "boolean",
+    "default": true
+  },
   "titleBarStyle": {
     "description": "General--The title bar style (Windows and Linux system only).",
     "enum": ["custom", "native"],
@@ -221,6 +226,11 @@
     "description": "General--Whether to check for updates in the background at startup.",
     "type": "boolean",
     "default": true
+  },
+  "skippedUpdateVersion": {
+    "description": "Internal--Version the user chose to skip in the updater window; suppresses the automatic prompt for that version only.",
+    "type": "string",
+    "default": ""
   },
   "preferLooseListItem": {
     "description": "Markdown--The preferred list type",

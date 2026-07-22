@@ -13,11 +13,19 @@
         <span
           v-if="currentNotification.showConfirm"
           class="inline-button"
+          :class="{ 'text-button': currentNotification.confirmText }"
           @click.stop="handleClick(true)"
         >
-          {{ t('common.ok') }}
+          {{ currentNotification.confirmText || t('common.ok') }}
         </span>
-        <span class="inline-button" @click.stop="handleClick(false)">
+        <span
+          v-if="currentNotification.closeText"
+          class="inline-button text-button"
+          @click.stop="handleClick(false)"
+        >
+          {{ currentNotification.closeText }}
+        </span>
+        <span v-else class="inline-button" @click.stop="handleClick(false)">
           <svg class="close-icon icon" aria-hidden="true">
             <use id="default-close-icon" xlink:href="#icon-close-small" />
           </svg>
@@ -108,6 +116,11 @@ const handleClick = (status) => {
     font-size: 12px;
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  & .inline-button.text-button {
+    width: auto;
+    padding: 0 8px;
+    white-space: nowrap;
   }
   & .inline-button:hover {
     background: rgba(255, 255, 255, 0.1);
