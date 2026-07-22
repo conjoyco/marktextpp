@@ -212,6 +212,12 @@ class Muya {
       this.contentState.importMarkdown(newMarkdown)
 
       finalCursor = this.contentState.convertMuyaIndexCursortoCursor(muyaIndexCursor)
+      // The index cursor may not map onto the new content (e.g. the document
+      // shrank below the old cursor line) — fall back to the default cursor
+      // instead of importing a half-empty one.
+      if (!finalCursor || !finalCursor.anchor || !finalCursor.focus) {
+        finalCursor = null
+      }
     } else {
       // No cursor defined, we can just parse the markdown
       this.contentState.importMarkdown(markdown)

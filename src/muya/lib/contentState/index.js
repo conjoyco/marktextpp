@@ -214,9 +214,18 @@ class ContentState {
   }
 
   setNextRenderRange() {
-    const { start, end } = this.cursor
-    const startBlock = this.getBlock(start.key)
-    const endBlock = this.getBlock(end.key)
+    const { start, end } = this.cursor || {}
+    const startBlock = start ? this.getBlock(start.key) : null
+    const endBlock = end ? this.getBlock(end.key) : null
+
+    // The cursor may reference a block that no longer exists (or no cursor may
+    // be set at all) — e.g. an empty-search render while focus is outside the
+    // document. Fall back to a full render range instead of dereferencing null.
+    if (!startBlock || !endBlock) {
+      this.renderRange = [null, null]
+      return
+    }
+
     const startOutMostBlock = this.findOutMostBlock(startBlock)
     const endOutMostBlock = this.findOutMostBlock(endBlock)
 
